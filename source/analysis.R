@@ -31,7 +31,7 @@ value_1_df <- mutate_all(value_1_df, ~replace(., is.infinite(.), 0))
 
 value_1 <- mean(value_1_df$men_jail_percent, na.rm = TRUE)
 
-
+print(value_1)
 
 
 
@@ -50,7 +50,7 @@ white_adult_pop_2016 <- sum(value_2_df$white_pop_15to64)
 
 value_2 <- white_adult_pop_2016 / total_adult_pop_2016
 
-
+print(value_2)
 
 
 
@@ -70,7 +70,7 @@ white_jail_pop_2016 <- sum(value_3_df$white_jail_pop)
 
 value_3 <- white_jail_pop_2016 / total_jail_pop_2016
 
-
+print(value_3)
 
 
 
@@ -87,7 +87,7 @@ assumed_king_jail_pop_2016 <- sum(value_4_df$total_jail_pop)
 
 value_4 <- assumed_king_jail_pop_2016 / assumed_king_total_pop_2016
 
-
+print(value_4)
 
 
 
@@ -104,7 +104,7 @@ santa_clara_jail_pop_2016 <- sum(value_5_df$total_jail_pop)
 
 value_5 <- santa_clara_jail_pop_2016 / santa_clara_total_pop_2016
 
-
+print(value_5)
 
 
 ## Trends Over Time chart
@@ -113,7 +113,7 @@ value_5 <- santa_clara_jail_pop_2016 / santa_clara_total_pop_2016
 # Showing Percent of Black Population in Jail over 1990-2016
 
 tot_df <- data %>%
-  select(year, county_name, black_pop_15to64, black_jail_pop)
+  select(year, county_name, black_pop_15to64, black_jail_pop, white_pop_15to64, white_jail_pop)
 
 tot_df <- mutate_all(tot_df, ~replace(., is.na(.), 0))
 tot_df <- mutate_all(tot_df, ~replace(., is.infinite(.), 0))
@@ -126,19 +126,19 @@ tot_df_summary <- tot_df_sums <- filter(tot_df_sums, year >= 1990)
 
 tot_df_summary <- mutate(
   tot_df_summary,
-  black_percent_in_jail = black_jail_pop / black_pop_15to64
+  black_percent_in_jail = black_jail_pop / black_pop_15to64,
+  white_percent_in_jail = white_jail_pop / white_pop_15to64
 )
 
-ggplot(tot_df_summary, mapping = aes(x = year, y = black_percent_in_jail)) +
-  geom_point(size=5) +
-  ggtitle("Percentage of Black Adult Population in Jail from 1990 to 2016") +
+ggplot(tot_df_summary, mapping = aes(x = year)) + 
+  geom_line(aes(y=black_percent_in_jail, color = "black"), size = 1.5) +
+  geom_line(aes(y=white_percent_in_jail, color = "white"), size = 1.5) +
+  ggtitle("Percentage of Adult Population in Jail from 1990 to 2016") +
   xlab("Year") +
-  ylab("Percentage") + 
-  geom_line() +
-  geom_smooth() 
+  ylab("Percentage") +
+  labs(color = "Demographic")
+
   
-
-
 
 ## Variable Comparison Chart
 
@@ -155,13 +155,13 @@ vcc_df_sums <- ddply(vcc_df, "state", numcolwise(sum))
 
 vcc_df_sums <- arrange(vcc_df_sums, -total_pop)
 
+vcc_df_sums <- filter(vcc_df_sums, total_pop > 7000000)
+
 vcc_df_sums <- mutate(
   vcc_df_sums,
-  black_percent_of_pop = black_pop_15to64 / total_pop,
-  white_percent_of_pop = white_pop_15to64 / total_pop
+  black = black_pop_15to64 / total_pop,
+  white = white_pop_15to64 / total_pop
 )
-
-library("tidyr")
 
 vcc_long <- vcc_df_sums %>%
   gather("Stat", "Value", -state)
@@ -172,12 +172,11 @@ level_order <- as.vector(vcc_for_plot$state)
 
 ggplot(vcc_for_plot, aes(x = level_order, y=Value, fill=Stat)) + 
   geom_col(position= "dodge") +
-  ggtitle("Percentage of Black and White Residents in all 50 States Ranked Largest to Smallest") +
+  ggtitle("Percentage of Black and White Residents in all 13 Largest States") +
   xlab("State") +
-  ylab("Percentage of Residents")
-
-
-
+  ylab("Percentage of Residents") +
+  scale_color_hue(labels = c("Black", "White")) +
+  labs(fill = "Demographic")
 
 
 ## Map
