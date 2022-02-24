@@ -1,0 +1,52 @@
+---
+title: "Assignment 3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r values, echo = FALSE, include= FALSE}
+source("../source/analysis.R", print.eval = TRUE)
+library(readr)
+library("tidyverse")
+library("tidyr")
+library(ggplot2)
+library("plyr")
+library(usdata)
+library("dplyr")
+```
+
+## Introduction
+
+In this project, we are analyzing a wide set of incarceration data at the county and state levels. Specifically, the data includes various races and their representation in various facets of jail. I chose to analyze male, black and white, and county specific data in calculating my values.
+
+The first value I calculated was the average county-wide percentage of males in prison in 2016 (the most recent year of reliable data). I found that `r value_1*100` percent of individuals in the average county are incarcerated as of 2016. I found this interesting as it could be useful to assess what a standard jailed percentage would be in some later values (values 4 and 5).
+
+The second value I calculated was the percentage of the total population that was white in 2016 (specifically adults aged 15 to 64). The percentage winded up being `r value_2*100`. I found this interesting because I was curious how much of the United States was white, and compare that to my anecdotal experience in Seattle. 
+
+The third value I calculated was the white percentage of the total jail population in 2016, which was `r value_3*100`. I found this interesting as it did not match the percentage of white population. This data meant white people are not proportionally represented in jail. 
+
+The fourth value I calculated was the percent of King County that was in jail in 2016, which ended up being `r value_4*100`. I found this interesting as it was slightly different than the `r value_1*100` we found to be the standard for an average county in Value 1. 
+
+Finally, I did the same calculation as Value 4, but for my home county of Santa Clara County. The percentage incarceration in Santa Clara County was `r value_5*100` in 2016. Again, this differs from the national average (and from King County for that matter).
+
+
+```{r chart1, echo = FALSE, message = FALSE}
+source("../source/Chart1.R", print.eval = TRUE)
+```
+
+This Cchart was included since it signifies the difference in racial demographics in large states. Clearly, the white population heavily outweighs the black population is nearly all of the 13 largest states (choosing 13 since Washington is the 13th largest state). It goes to show that the US is still majority white, even if incarceration rates don't follow that trend...
+
+```{r chart1, echo = FALSE, message = FALSE}
+source("../source/Chart2.R", print.eval = TRUE)
+```
+
+This chart 
+
+```{r chart1, echo = FALSE, message = FALSE}
+source("../source/Chart3.R", print.eval = TRUE)
+```
+
+
