@@ -32,21 +32,28 @@ The fourth value I calculated was the percent of King County that was in jail in
 
 Finally, I did the same calculation as Value 4, but for my home county of Santa Clara County. The percentage incarceration in Santa Clara County was `r value_5*100` in 2016. Again, this differs from the national average (and from King County for that matter).
 
+### Trends Over Time Chart
 
 ```{r chart1, echo = FALSE, message = FALSE}
 source("../source/Chart1.R", print.eval = TRUE)
 ```
 
-This Cchart was included since it signifies the difference in racial demographics in large states. Clearly, the white population heavily outweighs the black population is nearly all of the 13 largest states (choosing 13 since Washington is the 13th largest state). It goes to show that the US is still majority white, even if incarceration rates don't follow that trend...
+This chart shows how the black and white population each are represented in jail separately. The clear takeaway is the significant difference in the two lines. The white population has historically and continually had much lower representation in jail relative to the national population. Another minor pattern is the increase in black incarceration and eventually decrease in the mid 2000s. However, the significant takeaway still is the divide that has continued to remain stable throughout the last 30  years. 
 
-```{r chart1, echo = FALSE, message = FALSE}
+
+### Variable Comparison Chart
+
+```{r chart2, echo = FALSE, message = FALSE}
 source("../source/Chart2.R", print.eval = TRUE)
 ```
 
-This chart 
+This chart was included since it signifies the difference in racial demographics in large states. Clearly, the white population heavily outweighs the black population is nearly all of the 13 largest states (choosing 13 since Washington is the 13th largest state). It goes to show that the US is still majority white, even if incarceration rates don't follow that trend... 
 
-```{r chart1, echo = FALSE, message = FALSE}
+
+### Map Chart
+
+```{r chart3, echo = FALSE, message = FALSE}
 source("../source/Chart3.R", print.eval = TRUE)
 ```
 
-
+This map shows how different states have faired in narrowing the divide demonstrated in the first chart. Clearly, Texas and Missouri (among a few other states) have some serious problems when it comes to narrowing the divide between white and black representation in prison, with both at or around and 8 basis point different in the respective percentage of blacks and whites in prison. 

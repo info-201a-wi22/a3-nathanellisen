@@ -39,7 +39,7 @@ level_order <- as.vector(vcc_for_plot$state)
 
 ggplot(vcc_for_plot, aes(x = level_order, y=Value, fill=Stat)) + 
   geom_col(position= "dodge") +
-  ggtitle("Percentage of Black and White Residents in all 13 Largest States") +
+  ggtitle("Percentage of Black and White Residents in 13 Largest States") +
   xlab("State") +
   ylab("Percentage of Residents") +
   scale_color_hue(labels = c("Black", "White")) +
